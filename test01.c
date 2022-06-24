@@ -1,15 +1,15 @@
 #include <stdio.h>
-//Ğ´Ò»¸öÓĞĞòÊı×éarr£¬ÔÚÊı×éÖĞÕÒµ½7 
+//å†™ä¸€ä¸ªæœ‰åºæ•°ç»„arrï¼Œåœ¨æ•°ç»„ä¸­æ‰¾åˆ°11
 
-//¶ş·Ö²éÕÒ 
+//äºŒåˆ†æŸ¥æ‰¾ 
 int main(){
 	int arr[] = {1,2,3,4,5,6,7,8,9,10};
 	int k = 11;
-	int sz = sizeof(arr)/sizeof(arr[0]);//Êı×é³¤¶È 
-	int left = 0;//×óÏÂ±ê
-	int right = sz-1; //ÓÒÏÂ±ê 
+	int sz = sizeof(arr)/sizeof(arr[0]);//æ•°ç»„é•¿åº¦ 
+	int left = 0;//å·¦ä¸‹æ ‡
+	int right = sz-1; //å³ä¸‹æ ‡ 
 	while(left<=right){
-		int mid = (left + right)/2;//ÖĞ¼äÔªËØÏÂ±ê 
+		int mid = (left + right)/2;//ä¸­é—´å…ƒç´ ä¸‹æ ‡ 
 		if(arr[mid] > k){
 			right = mid-1;
 		
@@ -17,12 +17,12 @@ int main(){
 			left = mid+1;
 		
 		}else{
-			printf("ÕÒµ½ÁË£¬ÏÂ±êÎª:%d\n",mid);
+			printf("æ‰¾åˆ°äº†ï¼Œä¸‹æ ‡ä¸º:%d\n",mid);
 			break;
 		}
 	}
 	if(left>right){
-		printf("ÕÒ²»µ½ÔªËØ%d\n",k);
+		printf("æ‰¾ä¸åˆ°å…ƒç´ %d\n",k);
 	}
 	return 0;
 }
@@ -31,15 +31,15 @@ int main(){
 	int arr[] = {1,2,3,4,5,6,7,8,9,10};
 	int k = 7;
 	int i = 0;
-	int sz = sizeof(arr)/sizeof(arr[0]);//Êı×é³¤¶È 
+	int sz = sizeof(arr)/sizeof(arr[0]);//æ•°ç»„é•¿åº¦ 
 	for(i=0;i<sz;i++){
 		if(arr[i] == 7){
-			printf("ÕÒµ½ÁË£¬ÏÂ±êÊÇ£º%d\n",i);
+			printf("æ‰¾åˆ°äº†ï¼Œä¸‹æ ‡æ˜¯ï¼š%d\n",i);
 			break;
 		} 
 	}
 	if(i == sz){
-		printf("Ã»ÕÒµ½\n");
+		printf("æ²¡æ‰¾åˆ°\n");
 	}
 	return 0;
 }*/
