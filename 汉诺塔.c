@@ -1,14 +1,14 @@
 #include <stdio.h>
 /*
-ººÅµËþ£º
-	 1.Ò»´ÎÖ»¶¯Ò»¸ö
-	 2.Ð¡Ñ¹´ó
+æ±‰è¯ºå¡”ï¼š
+	 1.ä¸€æ¬¡åªåŠ¨ä¸€ä¸ª
+	 2.å°åŽ‹å¤§
 	 3.A-->C 
-	Ë¼Â·£º 
+	æ€è·¯ï¼š 
 			A      B    C
 			1(n) 
-			1	  (n)		---(n)ÈÆ¹ýC·Åµ½B 
-			(n)		    1	---(n)ÈÆ¹ýB·Åµ½C 
+			1     (n)	---(n)ç»•è¿‡Cæ”¾åˆ°B 
+			(n)	    1	---(n)ç»•è¿‡Bæ”¾åˆ°C 
 			            1(n)		
 */
 void hanoi_game(int n,char a,char b,char c){
@@ -23,13 +23,13 @@ void hanoi_game(int n,char a,char b,char c){
 		 
 }
 void move(char x,char y){
-	printf("%cÒÆ¶¯µ½%c\n",x,y);
+	printf("%cç§»åŠ¨åˆ°%c\n",x,y);
 }
 int main(){
 	int num = 0;
-	printf("ÇëÊäÈëËþÊý:>"); 
+	printf("è¯·è¾“å…¥å¡”æ•°:>"); 
 	scanf("%d",&num);
-	printf("ÒÆ¶¯²½Öè£º\n");
+	printf("ç§»åŠ¨æ­¥éª¤ï¼š\n");
 	hanoi_game(num,'A','B','C');
 	
 	return 0;
