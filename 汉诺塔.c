@@ -8,7 +8,7 @@
 			A      B    C
 			1(n) 
 			1     (n)	---(n)绕过C放到B 
-			(n)	    1	---(n)绕过B放到C 
+			      (n)   1	---(n)绕过A放到C 
 			            1(n)		
 */
 void hanoi_game(int n,char a,char b,char c){
