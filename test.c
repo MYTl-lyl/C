@@ -18,13 +18,13 @@ menu(){
 	printf("***** 1.add           2.del    ******\n");
 	printf("***** 3.search        4.modify ******\n");
 	printf("***** 5.show          6.sort   ******\n");
-	printf("***** 0.exit                   ******\n");
+	printf("***** 7.save          0.exit   ******\n");
 	printf("*************************************\n");
 }
 int main(){
 	int input = 0;
 	//创建通讯录
-    struct Contact con; //con就是通讯录，包含1000个元素和size 
+    struct Contact con; //con就是通讯录，包含data指针和size ，capacity 
     //初始化通讯录
     InitContact(&con);
 	do{
@@ -50,7 +50,14 @@ int main(){
 			case SORT:
 			    SortContact(&con);//排序 
 			    break;
+   			case SAVE://保存 
+				SaveContact(&con);
+				printf("保存成功\n");
+				break;
    			case EXIT:
+   				SaveContact(&con);
+   				//销毁通讯录,释放动态开辟内存 
+   				DestroyContact(&con); 
    				printf("退出通讯录\n");
    				break;
 			default:

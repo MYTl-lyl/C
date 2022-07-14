@@ -4,14 +4,59 @@
 
 //通讯录初始化 
 void InitContact(struct Contact* ps){
-	memset(ps->data,0,sizeof(ps->data));
-	ps->size = 0;//设置通讯录最初只有0个元素 
+//	memset(ps->data,0,sizeof(ps->data));
+//	ps->size = 0;//设置通讯录最初只有0个元素
+	 ps->data = (struct PeoInfo*)malloc(DEFAULT_SZ*sizeof(struct PeoInfo)); 
+	if(ps->data == NULL){
+		return;
+	} 
+	ps->size = 0;
+	ps->capacity = DEFAULT_SZ;
+	//把文件中已有的信息加载到通讯录
+	LoadContact(ps); 
+	 
+}
+//声明增容函数
+void  CheckCapacity(struct Contact* ps); 
+//加载信息
+void LoadContact(struct Contact* ps){
+	struct PeoInfo tmp = {0};
+	FILE* pfRead = fopen("contact.dat","rb");
+	if(pfRead == NULL){
+		printf("%s\n",strerror(errno));
+		return;
+	} 
+	//读文件，放到通讯录 
+	while(fread(&tmp,sizeof(struct PeoInfo),1,pfRead)){//返回的是实际读取的元素个数 
+		 CheckCapacity(ps); 
+		 ps->data[ps->size] = tmp;
+		 ps->size++;
+	}
+	//关闭文件
+	fclose(pfRead);
+	pfRead = NULL; 
+} 
+//检测通讯录容量
+void  CheckCapacity(struct Contact* ps){
+	if(ps->size == ps->capacity){
+		//增容 --- 每次增加2个 
+		 struct PeoInfo* ptr = (struct PeoInfo*)realloc(ps->data,(ps->capacity+2)*sizeof(struct PeoInfo));
+		if(ptr != NULL){
+			ps = ptr;
+			ps->capacity +=2;
+		}
+	} 
 }
 //添加 
 void AddContact(struct Contact* ps){ 
-	if(ps->size == MAX){
-		printf("通讯录已满，无法增加\n");
-	}else {
+	//检测当前通讯录的容量
+	//1.满了，增加空间
+	//2.不满，不干事 
+	CheckCapacity(ps); 
+	//增加数据 
+//	if(ps->size == MAX){
+//		printf("通讯录已满，无法增加\n");
+//	}else {
 		printf("请输入名字:>");
 		scanf("%s",ps->data[ps->size].name);
 		printf("请输入年龄:>");
@@ -24,8 +69,15 @@ void AddContact(struct Contact* ps){
 		scanf("%s",ps->data[ps->size].addr);
 		ps->size++;
 		printf("添加成功\n");
-	}	
+//	}	
 }
+
+//空间释放
+void DestroyContact(struct Contact* ps){
+	free(ps->data);
+	ps->data = NULL;	
+} 
+
 //显示 
 void ShowContact(const struct Contact* ps){ 
 	if(ps->size == 0){
@@ -129,4 +181,20 @@ void SearchContact(const struct Contact* ps){
 	 	}
 	 }
  } 
+ //保存 
+ void SaveContact(const struct Contact* ps){
+ 	FILE* pf = fopen("contact.dat","wb"); 
+	if(pf == NULL){
+		printf("%s\n",strerror(errno));
+		return;
+	}  
+	//写通讯录数据到文件
+	int i = 0;
+	for(i=0;i<ps->size;i++){
+		fwrite(&(ps->data[i]),sizeof(struct PeoInfo),1,pf);	
+	} 
+ 	//关闭文件
+	fclose(pf);
+	pf = NULL;  
+ }
  
