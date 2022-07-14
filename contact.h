@@ -3,9 +3,11 @@
 
 #include <stdio.h> 
 #include <string.h>
+#include <stdlib.h>
+#include <errno.h>
 
-
-#define MAX 1000
+//#define MAX 1000
+#define DEFAULT_SZ 3
 #define MAX_NAME 20
 #define MAX_SEX 5
 #define MAX_TELE 12
@@ -21,7 +23,8 @@ enum Option{
 	SEARCH,
 	MODIFY,
 	SHOW,
-	SORT
+	SORT,
+	SAVE 
 };
 
 
@@ -36,8 +39,9 @@ struct PeoInfo
 
 //通讯录类型
 struct Contact{
-	struct PeoInfo data[MAX];//存放1000个信息
+	struct PeoInfo* data;//存放信息,可调整 
 	int size;//记录当前已经有的元素个数	 
+	int capacity;//当前通讯录最大容量 
 }; 
 
 //声明函数
@@ -48,4 +52,7 @@ void DelContact(struct Contact* ps);//删除
 void SearchContact(const struct Contact* ps);//查找 
 void ModifyContact(struct Contact* ps); //修改 
 void SortContact (struct Contact* ps); //排序 
+void DestroyContact(struct Contact* ps);//空间释放 
+void SaveContact(const struct Contact* ps);//保存 
+void LoadContact(struct Contact* ps);//加载文件中的信息 
 #endif /* _MYHEAD_H_ */
